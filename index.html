@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Pengumuman Kelulusan SDN 3 Kesiman</title>
+
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    margin: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #333;
+}
+
+input {
+    padding: 12px;
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #6c63ff;
+    color: white;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Pengumuman Kelulusan</h1>
+<h3>SD Negeri 3 Kesiman</h3>
+<p>Tahun 2026</p>
+
+<input type="text" id="nama" placeholder="Masukkan Nama Lengkap">
+<br>
+<button onclick="cekKelulusan()">Cek Hasil</button>
+
+<div id="result"></div>
+</div>
+
+<canvas id="confetti"></canvas>
+
+<script>
+const lulus = [
+"aurelya vania prasyanto",
+"camelia lamalelang",
+"desak putu febby maha dewi",
+"fajar dwi andika",
+"gede arjun mirajaya",
+"gusti ngurah angga putra",
+"i dewa ayu eva jayanti putri",
+"i gede reynard ferrochie suryawan",
+"i kadek adi prananda",
+"i kadek aditya wiradinata",
+"i kadek ari aditya putra",
+"i kadek danu abhi prawira",
+"i ketut folan juanta cahya purnaweda",
+"i made windhu angga wardana",
+"i putu ashwin adi natha",
+"kadek deswandana pramana putra",
+"komang wirza semara nugraha",
+"made bayu dwiantara",
+"made vriska dwi harta anjani",
+"mohammad zidan alviano",
+"muhammad angga syafi triyasfan",
+"muhammad najiih ilhami",
+"nadila dwi indrayana",
+"ni kadek ekta dara sachita",
+"ni kadek icha anandita sawitri",
+"ni kadek sintia novita dewi",
+"ni ketut vania gea ananda",
+"ni made ayu cantika febriani",
+"ni wayan chintya nareswari putri",
+"putu putra aditya wistara",
+"putu sri anindya oktavia",
+"reza christian dwi prasetya",
+"ni putu anika radha anandini",
+"ni made putri cantika christy",
+"agung lanang prawira",
+"alvin mirza adiansyah",
+"ana muzilul qori simah",
+"anggun arista anggraeni",
+"asyam umar bagus",
+"bramasta ciwa adiguna",
+"cinta sefia cahaya nirwana",
+"figo walfi ramadani",
+"gede adhy dharma wijaya",
+"gede adriyasa sukmakarsa",
+"i dewa ayu dwi kartika athalia",
+"i dewa gede dima basudewa",
+"i gede wiryaguna",
+"i kadek ariana prabawa budiasa",
+"i kadek raditia ananta",
+"i ketut prema sathya nanda",
+"i komang ditya pramana putra",
+"i putu arjun ganeswara",
+"i putu dharma wiguna",
+"i putu gede erlangga wijaya putra",
+"i putu nanda prasetya saputra",
+"imam maulana",
+"kadek dwita mei friska dewi",
+"ketut diva partisya",
+"komang aprilia yogiswari",
+"najwa aqila akanza",
+"ni komang novita dewi",
+"ni luh sinar deswita aulia putri",
+"ni made bhiantari wirmadinata",
+"ni made christine indiana putri",
+"ni putu chintya renata aira dewi",
+"ni putu nesha anabella",
+"ni wayan sasmita pratiwi",
+"nirmala cahyaning setyo",
+"putu bagus bimantara suputra",
+"wayan aishwarya putra",
+"wayan tasya marsela",
+"flower aura azzahra"
+];
+
+function cekKelulusan() {
+    let input = document.getElementById("nama").value.toLowerCase().trim();
+    let result = document.getElementById("result");
+
+    if (input === "sri astuti") {
+        result.innerHTML = `
+        <p style="color:#e63946;"><b>Tetap Semangat 🌱</b></p>
+        <p>Perjalanan setiap orang berbeda. Hari ini mungkin belum sesuai harapan,
+        tapi bukan akhir dari segalanya. Tetaplah melangkah, karena masa depanmu
+        masih luas dan penuh kemungkinan indah.</p>`;
+        return;
+    }
+
+    if (lulus.includes(input)) {
+        result.innerHTML = `
+        <h2 style="color:#2a9d8f;">SELAMAT 🎓✨</h2>
+        <p>
+        Hari ini bukan sekadar akhir dari sebuah perjalanan, 
+        tetapi awal dari langkah-langkah besar yang akan kamu tempuh ke depan.
+        Setiap usaha, doa, dan kerja kerasmu akhirnya berbuah manis.
+        </p>
+        <p>
+        Teruslah melangkah dengan penuh keyakinan,
+        jadilah pribadi yang berani bermimpi dan rendah hati dalam pencapaian.
+        Dunia menunggumu dengan begitu banyak kemungkinan indah.
+        </p>
+        <p><b>Kamu dinyatakan LULUS.</b></p>
+        `;
+        startConfetti();
+    } else {
+        result.innerHTML = `<p>Nama tidak ditemukan</p>`;
+    }
+}
+
+/* CONFETTI */
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let pieces = [];
+
+function startConfetti() {
+    for (let i = 0; i < 150; i++) {
+        pieces.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 8 + 2,
+            speed: Math.random() * 3 + 2
+        });
+    }
+    animate();
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+        ctx.fillStyle = `hsl(${Math.random()*360},100%,50%)`;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = 0;
+    });
+    requestAnimationFrame(animate);
+}
+</script>
+
+</body>
+</html>
